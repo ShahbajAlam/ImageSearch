@@ -110,15 +110,11 @@ async function getImagesFromPexels(query) {
         }
         let response = await data.json();
         let pageCount = Math.floor(response.total_results / 15);
-        console.log(pageCount);
         if (pageNumber <= pageCount) {
             apiURL = `https://api.pexels.com/v1/search?query=${query}&page=${pageNumber}&per_page=15`;
             pageNumber++;
             data = await fetch(apiURL, authorisation);
             response = await data.json();
-            if (response.total_results === 0) {
-                noResultFound();
-            }
             response.photos.forEach((photo) => {
                 const imageURL = photo.src.large2x;
                 const photographer = photo.photographer;
@@ -148,15 +144,11 @@ async function getImagesFromPixabay(query) {
         }
         let response = await data.json();
         let pageCount = Math.floor(response.totalHits / 15);
-        console.log(pageCount);
         if (pageNumber <= pageCount) {
             apiURL = `https://pixabay.com/api/?key=${PIXABAY}&q=${query}&page=${pageNumber}&per_page=15`;
             pageNumber++;
             data = await fetch(apiURL);
             response = await data.json();
-            if (response.totalHits === 0) {
-                noResultFound();
-            }
             response.hits.forEach((photo) => {
                 const imageURL = photo.largeImageURL;
                 const photographer = photo.user;
@@ -278,7 +270,7 @@ goToTopBtn.addEventListener("click", goToTop);
 window.addEventListener("scroll", () => {
     if (
         window.scrollY + window.innerHeight >=
-        imageContainer.scrollHeight - 100
+        imageContainer.scrollHeight - 100 && siteChoice && query
     ) {
         showMore.classList.remove("hidden");
         if (isEnd) {

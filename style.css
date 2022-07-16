@@ -181,6 +181,7 @@ input[type="radio"]:checked + label::before {
     bottom: 1.5rem;
     right: 1.5rem;
     cursor: pointer;
+    z-index: 5;
 }
 
 .show__more {

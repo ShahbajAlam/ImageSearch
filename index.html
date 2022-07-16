@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Image Search</title>
+        <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <script src="index.js" defer></script>
+    </head>
+    <body>
+        <div class="custom__alert"></div>
+        <div class="backdrop hidden"></div>
+        <header>
+            <h1 class="heading">IMAGE SEARCH</h1>
+            <h3>SELECT SOURCE</h3>
+            <div class="input__container">
+                <input type="radio" name="source" id="unsplash" />
+                <label for="unsplash">Unsplash</label>
+
+                <input type="radio" name="source" id="pexels" />
+                <label for="pexels">Pexels</label>
+
+                <input type="radio" name="source" id="pixabay" />
+                <label for="pixabay">Pixabay</label>
+            </div>
+            <input
+                type="text"
+                name=""
+                id="search__item"
+                placeholder="eg. Mountains, Flowers etc"
+            />
+            <button type="submit" class="search__button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </header>
+
+        <div class="image__container"></div>
+        <i class="fa-solid fa-angles-up hidden"></i>
+        <button class="show__more hidden">show more</button>
+    </body>
+</html>

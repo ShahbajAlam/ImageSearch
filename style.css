@@ -1,0 +1,244 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("bg.svg");
+    opacity: 0.07;
+    z-index: -5;
+}
+
+header {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.input__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+input[type="radio" i] {
+    display: none;
+}
+
+label {
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+input[type="radio"]:checked + label::before {
+    position: absolute;
+    content: "";
+    inset: 0;
+    width: 0%;
+    height: 100%;
+    background-color: black;
+    border-radius: 10px;
+    z-index: -5;
+    opacity: 0.3;
+    animation: reveal;
+    animation-fill-mode: forwards;
+    animation-duration: 500ms;
+    animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes reveal {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+#search__item {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin: 2rem 0;
+    border-style: none;
+    border-bottom: 2px solid purple;
+    border-radius: 10px;
+    height: 40px;
+    background-color: transparent;
+}
+
+.search__button {
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: black;
+}
+.search__button:active {
+    transition-duration: 100ms;
+    transform: scale(0.95);
+}
+
+.fa-magnifying-glass {
+    color: white;
+}
+
+.custom__alert {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 40%;
+    padding: 1rem 0.5rem;
+    min-width: 17rem;
+    min-height: 10rem;
+    border-radius: 15px;
+    z-index: 5;
+    top: -10rem;
+    opacity: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    transition-duration: 800ms;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.custom__alert h2 {
+    text-align: center;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 2;
+}
+
+.hidden {
+    display: none;
+}
+
+.image__container {
+    margin-top: 2rem;
+    width: 90%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.image__container img {
+    width: 100%;
+    object-fit: cover;
+    border: 2px solid gray;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.fa-angles-up {
+    font-size: 2rem;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    cursor: pointer;
+}
+
+.show__more {
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.show__more:active {
+    transition-duration: 100ms;
+    transform: scale(0.95);
+}
+
+@media (min-width: 40rem) {
+    header {
+        width: 60%;
+    }
+    .input__container {
+        margin-top: 1rem;
+    }
+    .heading {
+        font-size: 3.5rem;
+    }
+    .search__button {
+        font-size: 2.5rem;
+    }
+    .image__container {
+        width: 65%;
+    }
+    .fa-angles-up {
+        bottom: 3rem;
+        right: 3rem;
+        font-size: 3rem;
+    }
+    .custom__alert {
+        width: 50%;
+        padding: 2rem 3rem;
+    }
+}
+
+@media (min-width: 60rem) {
+    header {
+        width: 40%;
+    }
+
+    .image__container {
+        width: 65%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+        row-gap: 1rem;
+    }
+
+    .image__container img {
+        align-self: center;
+    }
+}

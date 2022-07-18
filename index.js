@@ -56,7 +56,6 @@ const noMoreResults = () => {
     showAlertModal();
     alertModal.innerHTML = "";
     alertModal.innerHTML = `<h3 style="text-align:center">End of search results</h3>`;
-    showMore.classList.add("hidden");
 };
 
 async function getImagesFromUnsplash(query) {
@@ -72,10 +71,9 @@ async function getImagesFromUnsplash(query) {
             }
         }
         let response = await data.json();
-        let pageCount = response.total_pages;
+        console.log(response);
         if (pageNumber <= pageCount) {
             apiURL = `https://api.unsplash.com/search/photos/?client_id=${UNSPLASH}&query=${query}&page=${pageNumber}&per_page=15`;
-            pageNumber++;
             data = await fetch(apiURL);
             response = await data.json();
             response.results.forEach((photo) => {
@@ -87,13 +85,15 @@ async function getImagesFromUnsplash(query) {
                 updateUI(imageURL, photographer, hotlink, "Unsplash");
             });
         } else {
-            noMoreResults();
+            if (pageNumber === 1) noResultFound();
+            else noMoreResults();
         }
     } catch (error) {
         showBackdrop();
         showAlertModal();
         errorMessageRenderer(error);
     }
+    pageNumber++;
 }
 
 async function getImagesFromPexels(query) {
@@ -110,9 +110,9 @@ async function getImagesFromPexels(query) {
         }
         let response = await data.json();
         let pageCount = Math.floor(response.total_results / 15);
+        console.log(pageCount);
         if (pageNumber <= pageCount) {
             apiURL = `https://api.pexels.com/v1/search?query=${query}&page=${pageNumber}&per_page=15`;
-            pageNumber++;
             data = await fetch(apiURL, authorisation);
             response = await data.json();
             response.photos.forEach((photo) => {
@@ -122,13 +122,15 @@ async function getImagesFromPexels(query) {
                 updateUI(imageURL, photographer, hotlink, "Pexels");
             });
         } else {
-            noMoreResults();
+            if (pageNumber === 1) noResultFound();
+            else noMoreResults();
         }
     } catch (error) {
         showBackdrop();
         showAlertModal();
         errorMessageRenderer(error);
     }
+    pageNumber++;
 }
 
 async function getImagesFromPixabay(query) {
@@ -144,9 +146,9 @@ async function getImagesFromPixabay(query) {
         }
         let response = await data.json();
         let pageCount = Math.floor(response.totalHits / 15);
+        console.log(pageCount);
         if (pageNumber <= pageCount) {
             apiURL = `https://pixabay.com/api/?key=${PIXABAY}&q=${query}&page=${pageNumber}&per_page=15`;
-            pageNumber++;
             data = await fetch(apiURL);
             response = await data.json();
             response.hits.forEach((photo) => {
@@ -156,13 +158,15 @@ async function getImagesFromPixabay(query) {
                 updateUI(imageURL, photographer, hotlink, "Pixabay");
             });
         } else {
-            noMoreResults();
+            if (pageNumber === 1) noResultFound();
+            else noMoreResults();
         }
     } catch (error) {
         showBackdrop();
         showAlertModal();
         errorMessageRenderer(error);
     }
+    pageNumber++;
 }
 
 const showBackdrop = () => {
@@ -269,8 +273,9 @@ backdrop.addEventListener("click", backdropClickHandler);
 goToTopBtn.addEventListener("click", goToTop);
 window.addEventListener("scroll", () => {
     if (
-        window.scrollY + window.innerHeight >=
-        imageContainer.scrollHeight - 100 && siteChoice && query
+        window.scrollY + window.innerHeight >= imageContainer.scrollHeight &&
+        siteChoice &&
+        query
     ) {
         showMore.classList.remove("hidden");
         if (isEnd) {

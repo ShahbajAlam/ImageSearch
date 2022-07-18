@@ -237,6 +237,7 @@ const getValue = (sourceChoice, searchItem) => {
 };
 
 const searchBtnClickHandler = () => {
+    showMore.classList.add("hidden");
     pageNumber = 1;
     const sourceChoice = radioButtonInputChecker();
     const searchItem = userInputChecker();

@@ -295,3 +295,9 @@ showMore.addEventListener("click", () => {
         getImagesFromPixabay(query);
     }
 });
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        searchBtnClickHandler();
+    }
+});

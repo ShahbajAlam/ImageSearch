@@ -71,7 +71,7 @@ async function getImagesFromUnsplash(query) {
             }
         }
         let response = await data.json();
-        console.log(response);
+        let pageCount = response.total_pages;
         if (pageNumber <= pageCount) {
             apiURL = `https://api.unsplash.com/search/photos/?client_id=${UNSPLASH}&query=${query}&page=${pageNumber}&per_page=15`;
             data = await fetch(apiURL);
